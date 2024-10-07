@@ -67,22 +67,22 @@ The entry point for the application, implementing the menu-driven interface.
 
 - Python 3.x
 - MS SQL Server
-- Required Python libraries (you may need to install these)
+- Required Python libraries 
 
 ### Installation Steps
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone <https://github.com/Sarthakkul2311/Order-Mng-Sys.git>
    cd OrderManagementSystem
 
-2. Install required libraries (if any):
-       pip install <library-name>
+2. Install required libraries:
+       pip install pyodbc
 
 3. Update the database connection details in DBUtil.py to connect to your MS SQL Server.
 
 4. Run the application:
-       python main.py
+       python MainModule.py
    
 ## Author
 ### Sarthak Kulkarni
