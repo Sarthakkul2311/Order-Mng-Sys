@@ -1,0 +1,55 @@
+Create database OrderManagement;
+
+use OrderManagement;
+
+CREATE TABLE Users (
+    userId INT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    role VARCHAR(10) CHECK (role IN ('Admin', 'User')) NOT NULL
+);
+select * from Users;
+
+CREATE TABLE Products (
+    productId INT PRIMARY KEY,
+    productName VARCHAR(100) NOT NULL,
+    description TEXT,
+    price DECIMAL(10, 2) NOT NULL,
+    quantityInStock INT NOT NULL,
+    type VARCHAR(20) CHECK (type IN ('Electronics', 'Clothing')) NOT NULL
+);
+select * from Products;
+
+CREATE TABLE Electronics (
+    productId INT PRIMARY KEY REFERENCES Products(productId),
+    brand VARCHAR(100),
+    warrantyPeriod INT
+);
+select * from Electronics;
+
+CREATE TABLE Clothing (
+    productId INT PRIMARY KEY REFERENCES Products(productId),
+    size VARCHAR(10),
+    color VARCHAR(30)
+);
+select * from Clothing;
+
+CREATE TABLE Orders (
+    orderId INT IDENTITY(1,1) PRIMARY KEY,
+    userId INT FOREIGN KEY REFERENCES Users(userId),
+    orderDate DATETIME DEFAULT GETDATE()
+);
+
+ALTER TABLE Orders
+ADD productId INT,
+    quantity INT;
+
+select * from Orders;
+
+CREATE TABLE OrderDetails (
+    orderDetailId INT IDENTITY(1,1) PRIMARY KEY,
+    orderId INT FOREIGN KEY REFERENCES Orders(orderId),
+    productId INT FOREIGN KEY REFERENCES Products(productId),
+    quantity INT NOT NULL
+);
+select * from OrderDetails;
